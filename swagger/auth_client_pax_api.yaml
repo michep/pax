@@ -1,0 +1,99 @@
+swagger: '2.0'
+basePath: /api/v1/auth
+paths:
+  /send_code:
+    post:
+      summary: Запрос на отправку кода смс
+      parameters:
+        - name: phone
+          in: body
+          schema:
+            type: object
+            required:
+              - phone
+            properties:
+              phone:
+                type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                default: null
+              status:
+                type: string
+      tags:
+        - authentication
+  /validate_code:
+    post:
+      summary: Верификация полученного кода
+      parameters:
+        - name: phone_code
+          in: body
+          schema:
+            type: object
+            required:
+              - phone
+              - code
+            properties:
+              phone:
+                type: string
+              code:
+                type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                default: null
+              status:
+                type: string
+      tags:
+        - authentication
+  /logout:
+    post:
+      summary: Выход из системы
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                default: null
+              status:
+                type: string
+      tags:
+        - authentication
+
+info:
+  title: PAX client API
+  version: '1.0'
+  description: PAX client API
+produces:
+  - application/json
+consumes:
+  - application/json
+tags:
+  - name: authentication
+    description: Client sms code authentication
+definitions:
+
+  error:
+    type: object
+    properties:
+      status:
+        type: string
+      error:
+        type: string
+      error_code:
+        type: integer
+      message:
+        type: string
