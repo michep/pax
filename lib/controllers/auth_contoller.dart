@@ -5,6 +5,7 @@ import 'package:pax/api/auth_api.dart';
 import 'package:pax/api/auth_interface.dart';
 import 'package:pax/models/auth_api_models.dart';
 
+// ignore: constant_identifier_names
 const int PIN_RESEND_TIMEOUT = 10;
 
 enum LoginState {
@@ -42,7 +43,7 @@ class AuthController {
     return sendPhonePIN(_phone!);
   }
 
-  Future<void> verifyPIN(String pin) async {
+  Future<bool> verifyPIN(String pin) async {
     _pin = pin;
     var res = await _api.validateCode(ValidateCodeRequest(phone: _phone!, code: _pin!));
     if (res?.status == 'ok') {
@@ -50,17 +51,19 @@ class AuthController {
       _currentState.value = LoginState.phone;
       _errorMessage.value = null;
       _timer?.cancel();
+      return true;
     } else {
       _errorMessage.value = res?.data is String ? res?.data as String : 'GENERAL ERROR';
+      return false;
     }
   }
 
   void _initCountDown() {
     _countdown.value = PIN_RESEND_TIMEOUT;
-    _timer = Timer.periodic(const Duration(seconds: 1), _ontimer);
+    _timer = Timer.periodic(const Duration(seconds: 1), _onTimer);
   }
 
-  void _ontimer(Timer timer) {
+  void _onTimer(Timer timer) {
     if (_countdown.value == 0) {
       timer.cancel();
     } else {

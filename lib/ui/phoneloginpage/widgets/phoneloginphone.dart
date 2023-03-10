@@ -18,10 +18,13 @@ class _PhoneLoginPhoneState extends State<PhoneLoginPhone> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Личный кабинет', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+        const Text(
+          'Личный кабинет',
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 20),
         SizedBox(
-          width: MediaQuery.of(context).size.width / 4,
+          width: 360,
           child: TextField(
             controller: phoneCont,
             autofocus: true,
@@ -32,29 +35,29 @@ class _PhoneLoginPhoneState extends State<PhoneLoginPhone> {
                 type: MaskAutoCompletionType.lazy,
               ),
             ],
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Номер телефона',
               hintText: '+7 (###) ###-##-##',
+              focusColor: const Color(0xFFAFC4D1),
               border: OutlineInputBorder(
-                borderSide: BorderSide(),
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
         ),
         const SizedBox(height: 20),
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 4,
-          height: 48,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(360, 60),
+            backgroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-            onPressed: () => auth.sendPhonePIN(phoneCont.text),
-            child: const Text(
-              'Войти',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+          ),
+          onPressed: () => auth.sendPhonePIN(phoneCont.text),
+          child: const Text(
+            'Войти',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         )
       ],

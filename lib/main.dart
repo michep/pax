@@ -4,7 +4,7 @@ import 'package:pax/api/auth_api.dart';
 import 'package:pax/api/auth_api_mock.dart';
 import 'package:pax/api/auth_interface.dart';
 import 'package:pax/controllers/auth_contoller.dart';
-import 'package:pax/pax.dart';
+import 'package:pax/paxapp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

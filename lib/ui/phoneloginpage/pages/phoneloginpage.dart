@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pax/controllers/auth_contoller.dart';
-import 'package:pax/widgets/backdrop.dart';
-import 'package:pax/widgets/phoneloginframe.dart';
-import 'package:pax/widgets/phoneloginphone.dart';
-import 'package:pax/widgets/phoneloginpin.dart';
+import 'package:pax/ui/shared/widgets/backdrop.dart';
+import 'package:pax/ui/phoneloginpage/widgets/phoneloginframe.dart';
+import 'package:pax/ui/phoneloginpage/widgets/phoneloginphone.dart';
+import 'package:pax/ui/phoneloginpage/widgets/phoneloginpin.dart';
 
 class PhoneLoginPage extends StatelessWidget {
   PhoneLoginPage({super.key});
@@ -24,9 +24,9 @@ class PhoneLoginPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(32),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(16),
                     color: Colors.white,
                   ),
                   child: PhoneLoginFrame(

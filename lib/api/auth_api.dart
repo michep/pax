@@ -13,29 +13,29 @@ class AuthAPI implements AuthAPIInterface {
 
   @override
   Future<AuthResponse?> sendCode(SendCodeRequest data) async {
-    var res = await dio.postUri(
+    var res = await dio.postUri<Map<String, dynamic>>(
       baseUriFunc('/send_code'),
       options: Options(headers: {'Content-Type': 'application/json'}),
       data: data.toJson(),
     );
 
-    return res.data;
+    return AuthResponse.fromJson(res.data!);
   }
 
   @override
   Future<AuthResponse?> validateCode(ValidateCodeRequest data) async {
-    var res = await dio.postUri<AuthResponse>(
+    var res = await dio.postUri<Map<String, dynamic>>(
       baseUriFunc('/validate_code'),
       options: Options(headers: {'Content-Type': 'application/json'}),
       data: data.toJson(),
     );
 
-    return res.data;
+    return AuthResponse.fromJson(res.data!);
   }
 
   @override
   Future<void> logout() async {
-    var res = await dio.postUri(
+    await dio.postUri(
       baseUriFunc('/logout'),
       options: Options(headers: {'Content-Type': 'application/json'}),
     );

@@ -9,12 +9,14 @@ class AuthAPIMockup implements AuthAPIInterface {
 
   @override
   Future<AuthResponse?> sendCode(SendCodeRequest data) async {
+    // return AuthResponse(status: 'error', data: 'WRONG PHONE NUMBER FORMAT!!!');
     return AuthResponse(status: 'ok');
   }
 
   @override
   Future<AuthResponse?> validateCode(ValidateCodeRequest data) async {
-    return AuthResponse(status: 'error', data: 'PIN error!!!');
+    // return AuthResponse(status: 'error', data: 'PIN error!!!');
+    return AuthResponse(status: 'ok');
   }
 
   @override

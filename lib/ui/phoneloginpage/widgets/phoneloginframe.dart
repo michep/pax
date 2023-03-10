@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pax/ui/shared/widgets/paxlogo.dart';
 
 class PhoneLoginFrame extends StatelessWidget {
   final Widget child;
@@ -11,26 +12,27 @@ class PhoneLoginFrame extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: const [
             Padding(
-              padding: const EdgeInsets.only(
+              padding: EdgeInsets.only(
                 bottom: 100,
               ),
-              child: Image.asset(
-                'pax_logo_small.png',
-                height: 26,
-                width: 48,
-              ),
+              child: PaxLogo(),
             ),
           ],
         ),
-        Expanded(child: child),
+        Expanded(
+          child: child,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Padding(
               padding: EdgeInsets.only(top: 100),
-              child: Text('copyleft'),
+              child: Text(
+                '(C) 2023 PAx. Все права защищены.',
+                style: TextStyle(color: Colors.grey),
+              ),
             ),
           ],
         )

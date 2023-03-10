@@ -6,12 +6,13 @@ class Backdrop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        image: DecorationImage(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        image: const DecorationImage(
           alignment: Alignment.topLeft,
           fit: BoxFit.cover,
           image: AssetImage('pax_splash.jpg'),
+          // colorFilter: ColorFilter.mode(Colors.black, BlendMode.overlay),
         ),
       ),
     );

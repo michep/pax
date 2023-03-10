@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pax/controllers/auth_contoller.dart';
-import 'package:pax/widgets/pintimeout.dart';
+import 'package:pax/ui/clienthomepage/pages/clienthomepage.dart';
+import 'package:pax/ui/phoneloginpage/widgets/pintimeout.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PhoneLoginPin extends StatefulWidget {
@@ -19,10 +20,13 @@ class _PhoneLoginPinState extends State<PhoneLoginPin> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Ввести смс-код', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+        const Text(
+          'Ввести смс-код',
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 20),
         SizedBox(
-          width: MediaQuery.of(context).size.width / 6,
+          width: 270,
           child: PinCodeTextField(
             autoFocus: true,
             controller: pinCont,
@@ -30,33 +34,39 @@ class _PhoneLoginPinState extends State<PhoneLoginPin> {
             length: 4,
             pinTheme: PinTheme(
               shape: PinCodeFieldShape.box,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.circular(10),
               selectedColor: Colors.blue,
               inactiveColor: Colors.grey,
               activeColor: Colors.grey,
+              fieldWidth: 60,
+              fieldHeight: 60,
             ),
-            onChanged: (_) {},
+            onChanged: (value) {},
           ),
         ),
         const SizedBox(height: 20),
         PinTimeoutAndResend(),
         const SizedBox(height: 20),
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 4,
-          height: 48,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(360, 60),
+            backgroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-            onPressed: () => auth.verifyPIN(pinCont.text),
-            child: const Text(
-              'Войти',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+          ),
+          onPressed: () => verifyPIN(pinCont.text),
+          child: const Text(
+            'Войти',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         )
       ],
     );
+  }
+
+  void verifyPIN(String pin) async {
+    var ok = await auth.verifyPIN(pinCont.text);
+    if (ok) Get.offAll(() => const ClientHomePage());
   }
 }
