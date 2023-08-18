@@ -1,7 +1,9 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pax/ui/clienthomepage/pages/clienthomepage.dart';
 import 'ui/phoneloginpage/pages/phoneloginpage.dart';
 
 class PaxApp extends StatelessWidget {
@@ -10,13 +12,17 @@ class PaxApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: ThemeData(
-        textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme),
+    return CalendarControllerProvider(
+      controller: EventController(),
+      child: GetMaterialApp(
+        theme: ThemeData(
+          textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme),
+        ),
+        scrollBehavior: AppScrollBehavior(),
+        title: 'PAx',
+        // home: PhoneLoginPage(),
+        home: ClientHomePage(),
       ),
-      scrollBehavior: AppScrollBehavior(),
-      title: 'PAx',
-      home: PhoneLoginPage(),
     );
   }
 }

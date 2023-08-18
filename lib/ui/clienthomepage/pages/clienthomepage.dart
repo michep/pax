@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:pax/ui/clienthomepage/widgets/medcalendar.dart';
 import 'package:pax/ui/clienthomepage/widgets/medtable.dart';
 import 'package:pax/ui/clienthomepage/widgets/pagemenu.dart';
 
@@ -11,6 +13,22 @@ class ClientHomePage extends StatefulWidget {
 
 class _ClientHomePageState extends State<ClientHomePage> {
   final PageController controller = PageController();
+  final _key = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    // TODO: implement initState
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      var size = _key.currentContext!.size;
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +64,25 @@ class _ClientHomePageState extends State<ClientHomePage> {
                       color: const Color(0xFFC4DBEA),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: PageView(
-                      controller: controller,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: const [
-                        MedTable(),
-                        Text('календарь'),
-                        Text('история заказов'),
-                        Text('чат'),
-                        Text('звонок'),
-                        Text('настройки'),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: FractionallySizedBox(
+                        heightFactor: 1,
+                        widthFactor: 1,
+                        child: PageView(
+                          key: _key,
+                          controller: controller,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: const [
+                            MedTable(),
+                            MedCalendar(),
+                            Text('история заказов'),
+                            Text('чат'),
+                            Text('звонок'),
+                            Text('настройки'),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
